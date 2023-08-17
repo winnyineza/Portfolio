@@ -417,3 +417,29 @@ footer {
 footer p {
   text-align: center;
 }
+
+#repositories-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+}
+
+#repositories-container h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+#repositories-container p {
+  margin: 0;
+  color: #555;
+}
+
+#repositories-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#repositories-container a:hover {
+  text-decoration: underline;
+}
