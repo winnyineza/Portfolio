@@ -211,11 +211,11 @@
       
       const repositoriesContainer = document.getElementById('repositories-container');
       
-      fetch(`https://api.github.com/users/${username}/repos`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+fetch(`https://api.github.com/users/winnyineza/repos`, {
+  headers: {
+    Authorization: 'Bearer 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'
+  }
+})
         .then(response => response.json())
         .then(repositories => {
           repositories.forEach(repo => {
