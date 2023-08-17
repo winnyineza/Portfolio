@@ -200,19 +200,21 @@
       />
     </section>
     <!-- Add this script tag at the end of your HTML body -->
-<script>
-  const token = 'YOUR_TOKEN';
-  const username = 'winnyineza';
+<div id="repositories-container"></div>
 
-  fetch(`https://api.github.com/users/${username}/repos`, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
+<script>
+const token = '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';
+const username = 'winnyineza';
+
+const repositoriesContainer = document.getElementById('repositories-container');
+
+fetch(`https://api.github.com/users/${username}/repos`, {
+  headers: {
+    'Authorization': `Bearer ${token}`
+  }
+})
   .then(response => response.json())
   .then(repositories => {
-    const repositoriesContainer = document.getElementById('repositories-container');
-
     repositories.forEach(repo => {
       const repoItem = document.createElement('div');
       repoItem.innerHTML = `
