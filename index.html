@@ -206,15 +206,15 @@
       <div id="repositories-container"></div>
 
       <script>
-      const token = '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';
+      const token = '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';
       const username = 'winnyineza';
       
       const repositoriesContainer = document.getElementById('repositories-container');
       
-fetch(`https://api.github.com/users/winnyineza/repos`, {
+fetch(`https://api.github.com/users/mupagasi/repos`, {
   headers: {
-    Authorization: 'Bearer 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'
-  }
+    Authorization: 'Bearer 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'
+}
 })
         .then(response => response.json())
         .then(repositories => {
