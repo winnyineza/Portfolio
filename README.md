@@ -8,5 +8,4 @@ This website utilizes the RAPIDAPI Github API to fetch all my repositories onto 
 - HTML
 - CSS
 
-Website Link: 
-Video Link: 
+Website Link: https://winnyineza.github.io/Portfolio/
