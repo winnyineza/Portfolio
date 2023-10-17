@@ -200,50 +200,94 @@
       />
 
     </section>
+
     <section id="projects">
       <p class="section__text__p1">Browse My Recent</p>
       <h1 class="title">Projects</h1>
-      <div id="repositories-container"></div>
-
-      <script>
-      const token = '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';
-      const username = 'winnyineza';
-      
-      const repositoriesContainer = document.getElementById('repositories-container');
-      
-fetch(`https://api.github.com/users/mupagasi/repos`, {
-  headers: {
-    Authorization: 'Bearer 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'
-}
-})
-        .then(response => response.json())
-        .then(repositories => {
-          repositories.forEach(repo => {
-            const repoItem = document.createElement('div');
-            repoItem.innerHTML = `
-              <h3>${repo.name}</h3>
-              <p>${repo.description || 'No description available'}</p>
-              <a href="${repo.html_url}" target="_blank">View on GitHub</a>
-              <hr>
-            `;
-            repositoriesContainer.appendChild(repoItem);
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching repositories:', error);
-        });
-      </script>
-      
-            
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-1.png"
+                alt="Project 1"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project One</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Live Demo
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-2.png"
+                alt="Project 2"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project Two</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Live Demo
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-3.png"
+                alt="Project 3"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project Three</h2>
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn"
+                onclick="location.href='https://github.com/'"
+              >
+                Live Demo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <img
         src="./assets/arrow.png"
         alt="Arrow icon"
         class="icon arrow"
-        onclick="location.href='./#projects'"
+        onclick="location.href='./#contact'"
       />
-
-
     </section>
+    
     <section id="contact">
       <p class="section__text__p1">Get in Touch</p>
       <h1 class="title">Contact Me</h1>
