@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta information -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Page title -->
     <title>My Portfolio</title>
+    <!-- Link to external CSS files -->
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
+    <!-- Desktop navigation menu -->
     <nav id="desktop-nav">
-      <div class="logo"><a href='https://www.linkedin.com/in/winnydid'></a>Winny Didine</div>
+      <!-- Logo with a link to my portfolio -->
+      <div class="logo"><a href='https://winnyineza.github.io/Portfolio/'></a>Winny Didine</div>
+      <!-- Navigation links -->
       <div>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
@@ -18,6 +24,7 @@
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
           <li>
+            <!-- Light/dark mode toggle icon -->
             <img
               id="modeToggle"
               class="icon color-icon"
@@ -30,20 +37,25 @@
         </ul>
       </div>
     </nav>
+    <!-- Hamburger navigation menu (for mobile) -->
     <nav id="hamburger-nav">
-      <div class="logo"><a href='https://www.linkedin.com/in/winnydid'>Winny Didine Ineza</a></div>
+      <!-- Logo with a link to your LinkedIn profile -->
+      <div class="logo"><a href='https://winnyineza.github.io/Portfolio/'>Winny Didine Ineza</a></div>
       <div class="hamburger-menu">
+        <!-- Hamburger icon for menu toggle -->
         <div class="hamburger-icon" onclick="toggleMenu()">
           <span></span>
           <span></span>
           <span></span>
         </div>
+        <!-- Menu links -->
         <div class="menu-links">
           <li><a href="#about" onclick="toggleMenu()">About</a></li>
           <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
           <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
           <li>
+            <!-- Light/dark mode toggle icon -->
             <img
               id="modeToggle2"
               class="icon color-icon"
@@ -56,14 +68,17 @@
         </div>
       </div>
       </nav>
+    <!-- Profile section -->
     <section id="profile">
       <div class="section__pic-container">
+        <!-- Profile picture -->
         <img src="./assets/profile-pic-winny.png" alt="Winny Didine Ineza profile picture" />
       </div>
       <div class="section__text">
         <p class="section__text__p1">Hello, I'm</p>
         <h1 class="title">Winny Didine Ineza</h1>
         <p class="section__text__p2">Fullstack Developer</p>
+        <!-- Buttons for CV download and contact info -->
         <div class="btn-container">
           <button
             class="btn btn-color-2"
@@ -75,6 +90,7 @@
             Contact Info
           </button>
         </div>
+        <!-- Social media links -->
         <div id="socials-container">
           <img
             src="./assets/linkedin_light.png"
