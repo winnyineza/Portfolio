@@ -1,143 +1,356 @@
-function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
-  menu.classList.toggle("open");
-  icon.classList.toggle("open");
-}
-
-// Dark / light mode
-
-const btn = document.getElementById("modeToggle");
-const btn2 = document.getElementById("modeToggle2");
-const themeIcons = document.querySelectorAll(".icon");
-const currentTheme = localStorage.getItem("theme");
-
-if (currentTheme === "dark") {
-  setDarkMode();
-}
-
-btn.addEventListener("click", function () {
-  setTheme();
-});
-
-btn2.addEventListener("click", function () {
-  setTheme();
-});
-
-function setTheme() {
-  let currentTheme = document.body.getAttribute("theme");
-
-  if (currentTheme === "dark") {
-    setLightMode();
-  } else {
-    setDarkMode();
-  }
-}
-
-function setDarkMode() {
-  document.body.setAttribute("theme", "dark");
-  localStorage.setItem("theme", "dark");
-
-  themeIcons.forEach((icon) => {
-    icon.src = icon.getAttribute("src-dark");
-  });
-}
-
-function setLightMode() {
-  document.body.removeAttribute("theme");
-  localStorage.setItem("theme", "light");
-
-  themeIcons.forEach((icon) => {
-    icon.src = icon.getAttribute("src-light");
-  });
-}
-
-// Define an array of strings for the typing animation
-const textArray = ["Fullstack Developer", "Digital Communication Expert", "Freelancer"];
-
-// Define the index of the current string being typed
-let textIndex = 0;
-
-// Define the index of the character within the current string being typed
-let charIndex = 0;
-
-// Define the typing speed in milliseconds
-const typingSpeed = 60;
-
-// Function to perform the typing animation
-function type() {
-    if (charIndex < textArray[textIndex].length) {
-        // Append the next character to the text
-        document.querySelector('.typing-text').textContent += textArray[textIndex].charAt(charIndex);
-        charIndex++;
-        // Call the type function recursively after a delay
-        setTimeout(type, typingSpeed);
-    } else {
-        // Move to the next string in the array
-        setTimeout(erase, typingSpeed + 1000); // Wait for 2 seconds before erasing
-    }
-}
-
-// Function to perform the erasing animation
-function erase() {
-    if (charIndex > 0) {
-        // Remove the last character from the text
-        document.querySelector('.typing-text').textContent = textArray[textIndex].substring(0, charIndex - 1);
-        charIndex--;
-        // Call the erase function recursively after a delay
-        setTimeout(erase, typingSpeed / 2);
-    } else {
-        // Move to the next string in the array
-        textIndex = (textIndex + 1) % textArray.length;
-        // Call the type function to start typing the next string
-        setTimeout(type, typingSpeed);
-    }
-}
-
-// Start the typing animation
-type();
-
-document.addEventListener('DOMContentLoaded', function() {
-  const projects = [
-    { name: 'Fetcher App', category: 'web', github: 'https://github.com/winnyineza/Fetcher-app', demo: 'https://winnyineza.github.io/Fetcher-app/' },
-    { name: 'Portfolio', category: 'web', github: 'https://github.com/winnyineza/Portfolio/', demo: 'https://winnyineza.github.io/Portfolio/#projects' },
-    { name: 'Hire Express', category: 'design', figma: 'https://www.figma.com/file/UnCQ36Lb9zmGnFJZjfxm9j/Recruitment-Agency?type=design&node-id=0%3A1&mode=design&t=GG1WVvUNeRprkegs-1', demo: 'https://www.figma.com/proto/UnCQ36Lb9zmGnFJZjfxm9j/Recruitment-Agency?type=design&node-id=0-1&t=GG1WVvUNeRprkegs-0&scaling=min-zoom&page-id=0%3A1' }
-    // Add more project objects as needed
-  ];
-
-  const projectContainer = document.querySelector('.project-container');
-
-  function displayProjects(projects) {
-    projectContainer.innerHTML = '';
-
-    projects.forEach(project => {
-      const projectHTML = `
-        <div class="details-container color-container" data-category="${project.category}">
-          <div class="article-container">
-            <img src="./assets/${project.name}.png" alt="${project.name}" class="project-img" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta information -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Page title -->
+    <link rel="icon" href="./assets/profile-pic-winny.png" type="image/gif" sizes="16x16">
+    <title>My Portfolio</title>
+    <!-- Link to external CSS files -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+  </head>
+  <body>
+    <!-- Desktop navigation menu -->
+    <nav id="desktop-nav">
+      <!-- Logo with a link to my portfolio -->
+      <div class="logo"><a href='https://winnyineza.github.io/Portfolio/'></a>Winny Didine</div>
+      <!-- Navigation links -->
+      <div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <!-- Light/dark mode toggle icon -->
+            <img
+              id="modeToggle"
+              class="icon color-icon"
+              src="./assets/theme_light.png"
+              src-light="./assets/theme_light.png"
+              src-dark="./assets/theme_dark.png"
+              alt="Color them icon"
+            />
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Hamburger navigation menu (for mobile) -->
+    <nav id="hamburger-nav">
+      <!-- Logo with a link to your LinkedIn profile -->
+      <div class="logo"><a href='https://winnyineza.github.io/Portfolio/'>Winny Didine Ineza</a></div>
+      <div class="hamburger-menu">
+        <!-- Hamburger icon for menu toggle -->
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <!-- Menu links -->
+        <div class="menu-links">
+          <li><a href="#about" onclick="toggleMenu()">About</a></li>
+          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+          <li>
+            <!-- Light/dark mode toggle icon -->
+            <img
+              id="modeToggle2"
+              class="icon color-icon"
+              src="./assets/theme_light.png"
+              src-light="./assets/theme_light.png"
+              src-dark="./assets/theme_dark.png"
+              alt="Color them icon"
+            />
+          </li>
+        </div>
+      </div>
+      </nav>
+    <!-- Profile section -->
+    <section id="profile">
+      <div class="section__pic-container">
+        <!-- Profile picture -->
+        <img src="./assets/profile-pic-winny.png" alt="Winny Didine Ineza profile picture" />
+      </div>
+      <div class="section__text">
+        <p class="section__text__p1">Hello, I'm</p>
+        <h1 class="title">Winny Didine Ineza</h1>
+        <p class="section_text_p2 typing-text"></p>
+        <!-- Buttons for CV download and contact info -->
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2"
+            onclick="window.open('./assets/resume-example.pdf')"
+          >Download CV
+          </button>
+          <button class="btn btn-color-1" onclick="location.href='./#contact'">
+            Contact Info
+          </button>
+        </div>
+        <!-- Social media links -->
+        <div id="socials-container">
+          <img
+            src="./assets/linkedin_light.png"
+            src-light="./assets/linkedin_light.png"
+            src-dark="./assets/linkedin_dark.png"
+            alt="My LinkedIn profile"
+            class="icon linkedin-icon"
+            onclick="location.href='https://www.linkedin.com/in/winnydid/'"
+          />
+          <img
+            src="./assets/github_light.png"
+            src-light="./assets/github_light.png"
+            src-dark="./assets/github_dark.png"
+            alt="My github profile"
+            class="icon github-icon"
+            onclick="location.href='https://github.com/winnyineza'"
+          />
+        </div>
+      </div>
+    </section>
+    <section id="about">
+      <p class="section__text__p1">Get To Know More</p>
+      <h1 class="title">About Me</h1>
+      <div class="section-container">
+        <div class="section__pic-container">
+          <img
+            src="./assets/IMG_8615.JPG"
+            alt="Profile picture"
+            class="about-pic"
+          />
+        </div>
+        <div class="about-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <img
+                src="./assets/experience_light.png"
+                src-light="./assets/experience_light.png"
+                src-dark="./assets/experience_dark.png"
+                alt="Experience icon"
+                class="icon"
+              />
+              <h3>Experience</h3>
+              <p>2+ years <br />Frontend Development</p>
+            </div>
+            <div class="details-container">
+              <img
+                src="./assets/education_light.png"
+                src-light="./assets/education_light.png"
+                src-dark="./assets/education_dark.png"
+                alt="Education icon"
+                class="icon"
+              />
+              <h3>Education</h3>
+              <p>B.Sc. Bachelors Degree, ALU<br />Software Engineering</p>
+            </div>
           </div>
-          <h2 class="experience-sub-title project-title">${project.name}</h2>
-          <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="location.href='${project.github || project.figma}'">Github/Figma</button>
-            <button class="btn btn-color-2 project-btn" onclick="location.href='${project.demo}'">Live Demo</button>
+          <div class="text-container">
+            <p>
+              I fueled my passion for resolving and understanding customer complaints quickly and efficiently. I'm ambitious to build on my
+              academic foundations in software engineering and bide my time with the latest technologies and digital marketing strategies through
+              continued coursework and professional development. I prosper on challenges and constantly set goals for myself, so I have something
+              to rise for something new. I'm uncomfortable resting and always looking for an opportunity to improve and achieve higher.
+            </p> 
           </div>
         </div>
-      `;
-      projectContainer.innerHTML += projectHTML;
-    });
-  }
+      </div>
+      <img
+        src="./assets/arrow_light.png"
+        src-light="./assets/arrow_light.png"
+        src-dark="./assets/arrow_dark.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#experience'"
+      />
+    </section>
+    <section id="experience">
+      <p class="section__text__p1">Explore My</p>
+      <h1 class="title">Experience</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container">
+            <h2 class="experience-sub-title">Development</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>UI/UX Design</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Web Development</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Mobile App Development</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Web & App Testing</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="details-container">
+            <h2 class="experience-sub-title">Digital Communication</h2>
+            <div class="article-container">
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Strategy</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Art Direction</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Design</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+              <article>
+                <img
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Branding</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        src="./assets/arrow_light.png"
+        src-light="./assets/arrow_light.png"
+        src-dark="./assets/arrow_dark.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='./#projects'"
+      />
 
-  displayProjects(projects);
+    </section>
 
-  const filterBtns = document.querySelectorAll('.filter-btn');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      const category = btn.dataset.filter;
-      const filteredProjects = category === 'all' ? projects : projects.filter(project => project.category === category);
-      displayProjects(filteredProjects);
-      filterBtns.forEach(btn => btn.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-});
+    <section id="projects">
+      <h1 class="title">My Projects</h1>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web Development</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+      </div>
+      <div class="project-container">
+        <!-- Project details containers will be dynamically added here -->
+      </div>
+      <img src="./assets/arrow_light.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
+    </section>
+    
+    <section id="contact">
+      <p class="section__text__p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img
+            src="./assets/email_light.png"
+            src-light="./assets/email_light.png"
+            src-dark="./assets/email_dark.png"
+            alt="Email icon"
+            class="icon contact-icon email-icon"
+          />
+          <p><a href="mailto:nezawinnie@gmail.com">nezawinnie@gmail.com</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/linkedin_light.png"
+            src-light="./assets/linkedin_light.png"
+            src-dark="./assets/linkedin_dark.png"
+            alt="My LinkedIn profile"
+            class="icon linkedin-icon"
+            onclick="location.href='https://www.linkedin.com/in/winnydid'"
+          />
+          <p><a href="https://www.linkedin.com/in/winnydid">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; 2023 Winny Didine Ineza. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
