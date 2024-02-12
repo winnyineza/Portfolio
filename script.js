@@ -96,3 +96,48 @@ function erase() {
 
 // Start the typing animation
 type();
+
+document.addEventListener('DOMContentLoaded', function() {
+  const projects = [
+    { name: 'Fetcher App', category: 'web', github: 'https://github.com/winnyineza/Fetcher-app', demo: 'https://winnyineza.github.io/Fetcher-app/' },
+    { name: 'Portfolio', category: 'web', github: 'https://github.com/winnyineza/Portfolio/', demo: 'https://winnyineza.github.io/Portfolio/#projects' },
+    { name: 'Hire Express', category: 'design', figma: 'https://www.figma.com/file/UnCQ36Lb9zmGnFJZjfxm9j/Recruitment-Agency?type=design&node-id=0%3A1&mode=design&t=GG1WVvUNeRprkegs-1', demo: 'https://www.figma.com/proto/UnCQ36Lb9zmGnFJZjfxm9j/Recruitment-Agency?type=design&node-id=0-1&t=GG1WVvUNeRprkegs-0&scaling=min-zoom&page-id=0%3A1' }
+    // Add more project objects as needed
+  ];
+
+  const projectContainer = document.querySelector('.project-container');
+
+  function displayProjects(projects) {
+    projectContainer.innerHTML = '';
+
+    projects.forEach(project => {
+      const projectHTML = `
+        <div class="details-container color-container" data-category="${project.category}">
+          <div class="article-container">
+            <img src="./assets/${project.name}.png" alt="${project.name}" class="project-img" />
+          </div>
+          <h2 class="experience-sub-title project-title">${project.name}</h2>
+          <div class="btn-container">
+            <button class="btn btn-color-2 project-btn" onclick="location.href='${project.github || project.figma}'">Github/Figma</button>
+            <button class="btn btn-color-2 project-btn" onclick="location.href='${project.demo}'">Live Demo</button>
+          </div>
+        </div>
+      `;
+      projectContainer.innerHTML += projectHTML;
+    });
+  }
+
+  displayProjects(projects);
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const category = btn.dataset.filter;
+      const filteredProjects = category === 'all' ? projects : projects.filter(project => project.category === category);
+      displayProjects(filteredProjects);
+      filterBtns.forEach(btn => btn.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+});
